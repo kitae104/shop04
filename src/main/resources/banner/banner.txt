@@ -1,0 +1,10 @@
+${AnsiColor.RED} _____ _                   _____    ___
+${AnsiColor.RED}/  ___| |                 |  _  |  /   |
+${AnsiColor.RED}\ `--.| |__   ___  _ __   | |/' | / /| |
+${AnsiColor.RED} `--. \ '_ \ / _ \| '_ \  |  /| |/ /_| |
+${AnsiColor.RED}/\__/ / | | | (_) | |_) | \ |_/ /\___  |
+${AnsiColor.RED}\____/|_| |_|\___/| .__/   \___/     |_/
+${AnsiColor.RED}                  | |
+${AnsiColor.RED}                  |_|
+${AnsiColor.RED}${application.title} ${application.version}
+${AnsiColor.RED}Powered by Spring Boot ${spring-boot.version}
