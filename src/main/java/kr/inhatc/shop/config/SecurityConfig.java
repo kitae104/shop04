@@ -1,5 +1,6 @@
 package kr.inhatc.shop.config;
 
+import jakarta.servlet.http.HttpSession;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.security.config.Customizer;
@@ -29,8 +30,8 @@ public class SecurityConfig {
         http.logout(logout -> logout
                 .logoutUrl("/member/logout")
                 .logoutSuccessUrl("/")
-                .invalidateHttpSession(true)
-                .deleteCookies("JSESSIONID"));
+                );
+//
 
         http.authorizeHttpRequests(request -> request
                 .requestMatchers("/css/**", "/js/**", "/img/**").permitAll()
