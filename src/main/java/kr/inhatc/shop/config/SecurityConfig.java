@@ -18,6 +18,14 @@ public class SecurityConfig {
     public SecurityFilterChain filterChain(HttpSecurity http) throws Exception {
 
         //http.formLogin(Customizer.withDefaults());
+
+
+        http.authorizeHttpRequests(request -> request
+                .requestMatchers("/css/**", "/js/**", "/img/**").permitAll()
+                .requestMatchers("/", "/member/**", "/item/**", "/images/**").permitAll()
+                .requestMatchers("/admin/**").hasRole("ADMIN")
+                .anyRequest().authenticated())
+        ;
         http.formLogin(form -> form
                 .loginPage("/member/login")
                 .defaultSuccessUrl("/")
@@ -26,19 +34,11 @@ public class SecurityConfig {
                 .passwordParameter("password")
                 .permitAll());
 
-//        http.logout(Customizer.withDefaults());
-        http.logout(logout -> logout
-                .logoutUrl("/member/logout")
-                .logoutSuccessUrl("/")
-                );
-//
-
-        http.authorizeHttpRequests(request -> request
-                .requestMatchers("/css/**", "/js/**", "/img/**").permitAll()
-                .requestMatchers("/", "/member/**", "/item/**", "/images/**").permitAll()
-                .requestMatchers("/admin/**").hasRole("ADMIN")
-                .anyRequest().authenticated())
-        ;
+        //http.logout(Customizer.withDefaults());
+//        http.logout((logout) -> logout
+//                .logoutUrl("/member/logout")
+//                .logoutSuccessUrl("/")
+//        );
         return http.build();
     }
 

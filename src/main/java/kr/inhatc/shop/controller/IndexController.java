@@ -14,7 +14,7 @@ public class IndexController {
     public String index(@AuthenticationPrincipal PrincipalDetails userDetails, Model model) {
         if(userDetails != null) {
             Member member = userDetails.getMember();
-            model.addAttribute("message", "사용자 이름은 " + member.getName() + " 입니다.");
+            model.addAttribute("message", "사용자 이름은 " + member.getName() + "이고, 권한은 " + member.getRole().toString() + " 입니다.");
         } else {
             model.addAttribute("message", "로그인 전 입니다.");
         }
