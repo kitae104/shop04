@@ -16,16 +16,10 @@ public class SecurityConfig {
 
     @Bean
     public SecurityFilterChain filterChain(HttpSecurity http) throws Exception {
-
+        // 기본 로그인 사용하기
         //http.formLogin(Customizer.withDefaults());
-
-
-        http.authorizeHttpRequests(request -> request
-                .requestMatchers("/css/**", "/js/**", "/img/**").permitAll()
-                .requestMatchers("/", "/member/**", "/item/**", "/images/**").permitAll()
-                .requestMatchers("/admin/**").hasRole("ADMIN")
-                .anyRequest().authenticated())
-        ;
+        //http.logout(Customizer.withDefaults());
+        // 로그인 처리하기
         http.formLogin(form -> form
                 .loginPage("/member/login")
                 .defaultSuccessUrl("/")
@@ -34,11 +28,16 @@ public class SecurityConfig {
                 .passwordParameter("password")
                 .permitAll());
 
-        //http.logout(Customizer.withDefaults());
-//        http.logout((logout) -> logout
-//                .logoutUrl("/member/logout")
-//                .logoutSuccessUrl("/")
-//        );
+        // 각 페이지에 대한 접근 권한 설정
+        http.authorizeHttpRequests(request -> request
+                .requestMatchers("/css/**", "/js/**", "/img/**").permitAll()
+                .requestMatchers("/", "/member/**", "/item/**", "/images/**").permitAll()
+                .requestMatchers("/admin/**").hasAuthority("ADMIN")
+                .anyRequest().authenticated());
+
+        http.exceptionHandling(exception -> exception
+                .authenticationEntryPoint(new CustomAuthenticationEntryPoint()));
+
         return http.build();
     }
 
