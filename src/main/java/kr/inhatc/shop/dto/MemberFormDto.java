@@ -14,11 +14,12 @@ import org.hibernate.validator.constraints.Length;
 @Builder
 public class MemberFormDto {
 
-    @NotBlank(message = "이름은 필수 항목 입니다.")
+    // validation 어노테이션 추가
+    @NotBlank(message = "이름은 필수 항목 입니다.")  // NULL체크 및 문자열의 경우 길이 0 및 빈문자열(" ") 인지 검사
     private String name;
 
-    @NotEmpty(message = "이메일은 필수 항목 입니다.")
-    @Email(message = "이메일 형식이 올바르지 않습니다.")
+    @NotEmpty(message = "이메일은 필수 항목 입니다.")  // NULL체크 및 문자열의 경우 길이 0 인지 검사
+    @Email(message = "이메일 형식이 올바르지 않습니다.")  // 이메일 형식이 올바른지 검증한다.
     private String email;
 
     @NotEmpty(message = "비밀번호는 필수 항목 입니다.")
