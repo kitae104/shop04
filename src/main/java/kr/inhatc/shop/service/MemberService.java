@@ -50,9 +50,9 @@ public class MemberService implements UserDetailsService {
 
         // 스프링 시큐리티에서 제공하는 User 객체를 만들어 반환
         return User.builder()
-                .username(member.getEmail())
-                .password(member.getPassword())
-                .roles(member.getRole().toString())
+                .username(member.getEmail()) // 사용자 이메일
+                .password(member.getPassword()) // 패스워드는 암호화되어 저장되어 있음
+                .roles(member.getRole().toString()) // 사용자의 권한을 설정(문자열)
                 .build();
     }
 }
