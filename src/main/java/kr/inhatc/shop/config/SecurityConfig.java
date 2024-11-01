@@ -67,7 +67,7 @@ public class SecurityConfig {
                         .anyRequest().authenticated()  // 그 외의 요청은 인증 필요
                 );
 
-        // 권한 예외 처리 설정
+        // 권한 예외 처리 설정(인증 필요한 페이지에 권한 없는 사용자가 접근했을 때)
         http
                 .exceptionHandling(exception -> exception
                         .authenticationEntryPoint(new CustomAuthenticationEntryPoint())  // 권한 없는 접근 시 예외 처리
